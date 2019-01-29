@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { handleInitialData } from '../actions/shared';
 import { connect } from 'react-redux'
+import Dashboard from './Dashboard';
 
 class App extends Component {
   componentDidMount () {
@@ -9,11 +10,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        App
+      <div style={{margin: '0 auto', maxWidth: '1000px'}}>
+        <Dashboard />
       </div>
     );
   }
 }
 
-export default connect()(App);
+export default connect()(App)
