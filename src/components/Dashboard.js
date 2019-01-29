@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Paper, List, ListItem } from '@material-ui/core'
 import withStyles from '@material-ui/core/styles/withStyles'
+import QuestionPreview from './QuestionPreview';
 
 const styles = theme => ({
   container: {
@@ -19,7 +20,6 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
-  
 
   render () {
     const { classes, questionIDs } = this.props;
@@ -29,16 +29,17 @@ class Dashboard extends Component {
         <Paper className={classes.paper}>
           <List>
             {questionIDs.map((id) => (
-              <ListItem>
+              /* <ListItem key={id}>
                 {`Question ID: ${id}`}
-              </ListItem>
+              </ListItem> */
+              <QuestionPreview key={id} id={id} />
             ))}
           </List>
         </Paper>
-      </div>
-      
+      </div>    
     )
   }
+
 }
 
 function mapStateToProps ({ questions }) {

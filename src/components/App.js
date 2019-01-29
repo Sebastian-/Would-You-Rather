@@ -11,10 +11,18 @@ class App extends Component {
   render() {
     return (
       <div style={{margin: '0 auto', maxWidth: '1000px'}}>
-        <Dashboard />
+        {this.props.loading
+          ? null
+          : <Dashboard />}
       </div>
     );
   }
 }
 
-export default connect()(App)
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App)
