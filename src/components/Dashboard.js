@@ -3,13 +3,9 @@ import { connect } from 'react-redux'
 import { Paper, List } from '@material-ui/core'
 import withStyles from '@material-ui/core/styles/withStyles'
 import QuestionCard from './QuestionCard';
+import QuestionPoll from './QuestionPoll';
 
 const styles = theme => ({
-  container: {
-    maxWidth: '1000px',
-    margin: '0 auto',
-    padding: '10px'
-  },
   paper: {
     marginTop: theme.spacing.unit * 8,
     display: 'flex',
@@ -25,18 +21,16 @@ class Dashboard extends Component {
     const { classes, questionIDs } = this.props;
 
     return (
-      <div className={classes.container}>
-        <Paper className={classes.paper}>
-          <List>
-            {questionIDs.map((id) => (
-              /* <ListItem key={id}>
-                {`Question ID: ${id}`}
-              </ListItem> */
-              <QuestionCard key={id} id={id} />
-            ))}
-          </List>
-        </Paper>
-      </div>    
+      <Paper className={classes.paper}>
+        <List>
+          {questionIDs.map((id) => (
+            /* <ListItem key={id}>
+              {`Question ID: ${id}`}
+            </ListItem> */
+            <QuestionPoll key={id} id={id} />
+          ))}
+        </List>
+      </Paper>
     )
   }
 
