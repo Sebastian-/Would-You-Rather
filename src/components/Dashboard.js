@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Paper, List, ListItem } from '@material-ui/core'
+import { Paper, List } from '@material-ui/core'
 import withStyles from '@material-ui/core/styles/withStyles'
 import QuestionPreview from './QuestionPreview';
 
