@@ -9,7 +9,7 @@ export function handleInitialData () {
       .then(({ questions, users }) => {
         dispatch(receiveQuestions(questions))
         dispatch(receiveUsers(users))
-        dispatch(setAuthUser('TEMP_USER_ID'))
+        dispatch(setAuthUser('tylermcginnis'))
       })
   }
 }
