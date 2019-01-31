@@ -5,13 +5,10 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { formatDate } from '../utils/helpers'
 
 /*
-    TODO: Refactor this component to render different card content depending on the route
-      - if route is '/', render question options content
-      - if route is '/question' and not answered render question poll content
-      - if route is '/question' and answered render question results content
+    TODO: This component will likely need an 'isAnswered' prop
 */
 
-class QuestionPreview extends Component {
+class QuestionCard extends Component {
 
   render () {
     const { classes, author, question } = this.props;
@@ -89,4 +86,4 @@ function mapStateToProps ({ questions, users }, { id }) {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(QuestionPreview))
+export default connect(mapStateToProps)(withStyles(styles)(QuestionCard))

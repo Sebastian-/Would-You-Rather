@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Paper, List } from '@material-ui/core'
 import withStyles from '@material-ui/core/styles/withStyles'
-import QuestionPreview from './QuestionPreview';
+import QuestionCard from './QuestionCard';
 
 const styles = theme => ({
   container: {
@@ -32,7 +32,7 @@ class Dashboard extends Component {
               /* <ListItem key={id}>
                 {`Question ID: ${id}`}
               </ListItem> */
-              <QuestionPreview key={id} id={id} />
+              <QuestionCard key={id} id={id} />
             ))}
           </List>
         </Paper>
