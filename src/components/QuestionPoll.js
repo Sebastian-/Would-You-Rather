@@ -4,33 +4,14 @@ import {
   Card,
   CardHeader,
   Avatar,
-  CardContent,
   Typography,
   Divider,
-  Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
   withStyles 
 } from '@material-ui/core'
+import PollForm from './PollForm'
 
 
 class QuestionPoll extends Component {
-
-  state = {
-    value: ''
-  }
-
-  handleChange = event => {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-    console.log(this.state.value)
-
-    // TODO: dispatch to store
-  }
 
   render () {
     const { classes, author, question } = this.props;
@@ -45,32 +26,9 @@ class QuestionPoll extends Component {
           title={<Typography variant="h4">{`${author.name} asks: `}</Typography>}
         />
         <Divider />
-        <CardContent>
-          <Typography variant="h5" className={classes.center}>
-            Would You Rather . . .
-          </Typography>
-          <form onSubmit={this.handleSubmit}>
-            <RadioGroup
-              name="pollOptions"
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel 
-                value="optionOne" 
-                control={<Radio />} 
-                label={<Typography variant="h6">{question.optionOne.text}</Typography>}
-              />
-              <FormControlLabel 
-                value="optionTwo" 
-                control={<Radio />} 
-                label={<Typography variant="h6">{question.optionTwo.text}</Typography>}
-              />
-            </RadioGroup>
-            <Button className={classes.button} type='submit'>
-              Submit
-            </Button>
-          </form>
-        </CardContent>
+        <PollForm 
+          optionOne={question.optionOne.text}
+          optionTwo={question.optionTwo.text} />
       </Card>
     )
   }
@@ -90,12 +48,6 @@ const styles = theme => ({
     margin: 10,
     width: 60,
     height: 60,
-  },
-  center: {
-    textAlign: 'center'
-  },
-  button: {
-    width: '100%'
   }
 });
 
