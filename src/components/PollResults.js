@@ -12,14 +12,16 @@ class PollResults extends Component {
   render () {
     const { classes, optionOne, optionTwo, answer } = this.props;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length
-    const optionOnePercent = (optionOne.votes.length/totalVotes) * 100
-    const optionTwoPercent = (optionTwo.votes.length/totalVotes) * 100
+    const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100)
+    const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100)
 
     return (
       <CardContent>
         <Paper
           className={classes.option}
-          style={(answer === 'optionOne') ? {backgroundColor: '#b2dfdb', border: '5px solid black'} : {}}>
+          style={(answer === 'optionOne')
+              ? {backgroundColor: '#b2dfdb', border: '5px solid black'}
+              : {}}>
           <Typography variant='h6'>
             {`Would you rather ${optionOne.text}?`}
           </Typography>
@@ -37,7 +39,9 @@ class PollResults extends Component {
         </Paper>
         <Paper
           className={classes.option}
-          style={(answer === 'optionTwo') ? {backgroundColor: '#b2dfdb', border: '5px solid black'} : {}}>
+          style={(answer === 'optionTwo')
+              ? {backgroundColor: '#b2dfdb', border: '5px solid black'}
+              : {}}>
           <Typography variant='h6'>
             {`Would you rather ${optionTwo.text}?`}
           </Typography>
