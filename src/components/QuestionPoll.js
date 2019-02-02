@@ -9,12 +9,13 @@ import {
   withStyles 
 } from '@material-ui/core'
 import PollForm from './PollForm'
+import PollResults from './PollResults'
 
 
 class QuestionPoll extends Component {
 
   render () {
-    const { classes, author, question } = this.props;
+    const { classes, author, question, answer } = this.props;
 
     return (
       <Card className={classes.card}>
@@ -23,12 +24,20 @@ class QuestionPoll extends Component {
           avatar={
             <Avatar src={author.avatarURL} className={classes.avatar}/>
           }
-          title={<Typography variant="h4">{`${author.name} asks: `}</Typography>}
+          title={answer
+            ? <Typography variant="h4">{`Asked by ${author.name}`}</Typography>
+            : <Typography variant="h4">{`${author.name} asks: `}</Typography>
+          }
         />
         <Divider />
-        <PollForm 
-          optionOne={question.optionOne.text}
-          optionTwo={question.optionTwo.text} />
+        {answer
+          ? <PollResults
+              answer={answer}
+              optionOne={question.optionOne}
+              optionTwo={question.optionTwo} />
+          : <PollForm 
+              optionOne={question.optionOne.text}
+              optionTwo={question.optionTwo.text} />}
       </Card>
     )
   }
@@ -51,13 +60,15 @@ const styles = theme => ({
   }
 });
 
-function mapStateToProps ({ questions, users }, { id }) {
+function mapStateToProps ({ questions, users, authedUser }, { id }) {
   const question = questions[id]
   const author = users[question.author]
+  const answer = users[authedUser].answers[id] || ''
   
   return {
     question,
-    author
+    author,
+    answer
   }
 }
 
