@@ -7,13 +7,30 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  Button
 } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
-
-// TODO: implement form control state, dispatch user login
+import { setAuthUser } from '../actions/authedUser';
 
 class Login extends Component {
+  state = {
+    userID: ''
+  }
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const { userID } = this.state
+
+    if (userID === '') 
+      return
+    else
+      this.props.dispatch(setAuthUser(userID))
+  }
   
   render () {
     const { users } = this.props
@@ -25,18 +42,24 @@ class Login extends Component {
           <LockIcon />
         </Avatar>
         <Typography>Sign In</Typography>
-        <FormControl required fullWidth={true}>
-          <InputLabel htmlFor='user'>User</InputLabel>
-          <Select
-            name='user'>
-            {users.map((user) => (
-              <MenuItem key={user.id} value={user.id}>
-                <Avatar src={user.avatar} />
-                <Typography>{user.name}</Typography>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <form onSubmit={this.handleSubmit}>
+          <FormControl required fullWidth={true}>
+            <InputLabel htmlFor='user'>User</InputLabel>
+            <Select
+              name='userID'
+              value={this.state.userID}
+              onChange={this.handleChange}
+            >
+              {users.map((user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  <Avatar src={user.avatar} />
+                  <Typography>{user.name}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button type='submit'>Sign In</Button>
+        </form>
       </Paper>
     )
   }
