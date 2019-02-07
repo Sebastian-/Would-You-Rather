@@ -8,10 +8,11 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button
+  Button,
+  withStyles
 } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
-import { setAuthUser } from '../actions/authedUser';
+import { setAuthUser } from '../actions/authedUser'
 
 class Login extends Component {
   state = {
@@ -33,37 +34,79 @@ class Login extends Component {
   }
   
   render () {
-    const { users } = this.props
+    const { users, classes } = this.props
 
     return (
-      <Paper>
-        <Typography>Welcome to the Would You Rather App!</Typography>
-        <Avatar>
-          <LockIcon />
+      <Paper className={classes.paper}>
+        <Typography variant='h5'>Welcome to the Would You Rather App!</Typography>
+        <Avatar className={classes.loginAvatar}>
+          <LockIcon className={classes.loginIcon}/>
         </Avatar>
-        <Typography>Sign In</Typography>
-        <form onSubmit={this.handleSubmit}>
-          <FormControl required fullWidth={true}>
-            <InputLabel htmlFor='user'>User</InputLabel>
+        <form className={classes.form} onSubmit={this.handleSubmit}>
+          <FormControl fullWidth={true}>
+            <InputLabel htmlFor='userID'>Select a User</InputLabel>
             <Select
               name='userID'
               value={this.state.userID}
               onChange={this.handleChange}
+              classes={{
+                select: classes.menuItem
+              }}
             >
               {users.map((user) => (
-                <MenuItem key={user.id} value={user.id}>
+                <MenuItem className={classes.menuItem} key={user.id} value={user.id}>
                   <Avatar src={user.avatar} />
                   <Typography>{user.name}</Typography>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <Button type='submit'>Sign In</Button>
+          <Button fullWidth={true} type='submit'>Sign In</Button>
         </form>
       </Paper>
     )
   }
 }
+
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    margin: 'auto',
+    maxWidth: 500,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  loginAvatar: {
+    margin: theme.spacing.unit * 2,
+    width: 150,
+    height: 150
+  },
+  loginIcon: {
+    width: 100,
+    height: 100
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+    height: 125,
+    justifyContent: 'space-evenly'
+  },
+  menuItem: {
+    display: 'flex',
+    alignItems: 'center',
+    '& div': {
+      marginRight: 20,
+      marginLeft: 20
+    },
+    '& p': {
+      flexBasis: '1'
+    }
+  }
+})
 
 function mapStateToProps ({ users }) {
   return {
@@ -75,4 +118,4 @@ function mapStateToProps ({ users }) {
   }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(withStyles(styles)(Login))
