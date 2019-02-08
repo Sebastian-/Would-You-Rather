@@ -15,7 +15,7 @@ import PollResults from './PollResults'
 class QuestionPoll extends Component {
 
   render () {
-    const { classes, author, question, answer } = this.props;
+    const { classes, author, question, answer, id } = this.props;
 
     return (
       <Card className={classes.card}>
@@ -35,9 +35,7 @@ class QuestionPoll extends Component {
               answer={answer}
               optionOne={question.optionOne}
               optionTwo={question.optionTwo} />
-          : <PollForm 
-              optionOne={question.optionOne.text}
-              optionTwo={question.optionTwo.text} />}
+          : <PollForm id={id} />}
       </Card>
     )
   }
@@ -60,6 +58,9 @@ const styles = theme => ({
   }
 });
 
+
+// TODO: handle case where question doesn't exist
+// TODO: limit question data to whatever is necessary for rendering (see chirper app)
 function mapStateToProps ({ questions, users, authedUser }, { id }) {
   const question = questions[id]
   const author = users[question.author]

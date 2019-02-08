@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   withStyles 
 } from '@material-ui/core'
+import { handleQuestionResponse } from '../actions/shared';
 
 
 class PollForm extends Component {
@@ -23,9 +24,17 @@ class PollForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state.value)
+    const { value } = this.state
+    const { authedUser, id, dispatch } = this.props
 
-    // TODO: dispatch to store
+    if (value === '')
+      return
+    else
+      dispatch(handleQuestionResponse({
+        qid: id,
+        answer: value,
+        authedUser,
+      }))
   }
 
   render () {
@@ -72,4 +81,12 @@ const styles = theme => ({
   }
 });
 
-export default connect()(withStyles(styles)(PollForm))
+function mapStateToProps ({ questions, authedUser }, {id}) {
+  return {
+    authedUser: authedUser,
+    optionOne: questions[id].optionOne.text,
+    optionTwo: questions[id].optionTwo.text
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(PollForm))

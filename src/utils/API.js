@@ -1,6 +1,7 @@
 import {
   _getUsers,
-  _getQuestions
+  _getQuestions,
+  _saveQuestionAnswer
 } from './_DATA'
 
 export function getInitialData() {
@@ -11,4 +12,13 @@ export function getInitialData() {
     questions,
     users
   }))
+}
+
+/**
+ * 
+ * @param {authedUser, qid, answer} info 
+ * answer is either 'optionOne' or 'optionTwo'
+ */
+export function saveQuestionAnswer(info) {
+  return _saveQuestionAnswer(info)
 }
