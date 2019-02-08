@@ -9,6 +9,7 @@ import {
   withStyles,
   Button
 } from '@material-ui/core'
+import { handleAddQuestion } from '../actions/questions';
 
 
 class NewQuestion extends Component {
@@ -22,9 +23,12 @@ class NewQuestion extends Component {
     this.setState({ [prop]: event.target.value });
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    // TODO: implement adding a new question
+  handleSubmit = event => {
+    event.preventDefault()
+    const { optionOne, optionTwo } = this.state
+    const { dispatch } = this.props
+
+    dispatch(handleAddQuestion(optionOne, optionTwo))
   }
 
   render () {
