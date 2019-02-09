@@ -1,5 +1,5 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION } from '../actions/questions'
-import { ADD_ANSWER } from '../actions/shared'
+import { RECEIVE_QUESTIONS } from '../actions/questions'
+import { ADD_ANSWER, ADD_QUESTION } from '../actions/shared'
 
 export default function questionReducer(state = {}, action) {
   switch(action.type) {

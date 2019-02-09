@@ -9,7 +9,7 @@ import {
   withStyles,
   Button
 } from '@material-ui/core'
-import { handleAddQuestion } from '../actions/questions';
+import { handleAddQuestion } from '../actions/shared'
 
 
 class NewQuestion extends Component {
@@ -29,6 +29,11 @@ class NewQuestion extends Component {
     const { dispatch } = this.props
 
     dispatch(handleAddQuestion(optionOne, optionTwo))
+
+    this.setState({
+      optionOne: '',
+      optionTwo: ''
+    })
   }
 
   render () {
