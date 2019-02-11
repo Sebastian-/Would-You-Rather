@@ -15,26 +15,32 @@ import PollResults from './PollResults'
 class QuestionPoll extends Component {
 
   render () {
-    const { classes, author, question, answer, id } = this.props;
+    const { classes, id, answer, question } = this.props;
+
+    if (question === null) {
+      return <h3>{`404: Question not found at /question/${id}`}</h3>
+    }
+
+    const { optionOne, optionTwo, avatarURL, authorName } = question
 
     return (
       <Card className={classes.card}>
          <CardHeader
           className={classes.header}
           avatar={
-            <Avatar src={author.avatarURL} className={classes.avatar}/>
+            <Avatar src={avatarURL} className={classes.avatar}/>
           }
           title={answer
-            ? <Typography variant="h4">{`Asked by ${author.name}`}</Typography>
-            : <Typography variant="h4">{`${author.name} asks: `}</Typography>
+            ? <Typography variant="h4">{`Asked by ${authorName}`}</Typography>
+            : <Typography variant="h4">{`${authorName} asks: `}</Typography>
           }
         />
         <Divider />
         {answer
           ? <PollResults
               answer={answer}
-              optionOne={question.optionOne}
-              optionTwo={question.optionTwo} />
+              optionOne={optionOne}
+              optionTwo={optionTwo} />
           : <PollForm id={id} />}
       </Card>
     )
@@ -58,20 +64,22 @@ const styles = theme => ({
   }
 });
 
-
-// TODO: handle case where question doesn't exist
-// TODO: limit question data to whatever is necessary for rendering (see chirper app)
 function mapStateToProps ({ questions, users, authedUser }, props) {
   const { id } = props.match.params
   const question = questions[id]
-  const author = users[question.author]
   const answer = users[authedUser].answers[id] || ''
   
   return {
     id,
-    question,
-    author,
-    answer
+    answer,
+    question: question 
+      ? {
+          optionOne: question.optionOne,
+          optionTwo: question.optionTwo,
+          avatarURL: users[question.author].avatarURL,
+          authorName: users[question.author].name
+        }
+      : null
   }
 }
 
