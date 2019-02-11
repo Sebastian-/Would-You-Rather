@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   Paper,
   Typography,
@@ -16,7 +17,8 @@ class NewQuestion extends Component {
   
   state = {
     optionOne: '',
-    optionTwo: ''
+    optionTwo: '',
+    toHome: false
   }
 
   handleChange = prop => event => {
@@ -32,12 +34,17 @@ class NewQuestion extends Component {
 
     this.setState({
       optionOne: '',
-      optionTwo: ''
+      optionTwo: '',
+      toHome: true
     })
   }
 
   render () {
     const { classes } = this.props
+
+    if (this.state.toHome) {
+      return <Redirect to='/' />
+    }
 
     return (
       <Paper className={classes.paper}>
