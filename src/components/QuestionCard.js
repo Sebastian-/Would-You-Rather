@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { formatDate } from '../utils/helpers'
+import { formatDate, formatQuestion } from '../utils/helpers'
 import {
   Card,
   CardHeader,
@@ -15,24 +15,22 @@ import {
   withStyles
 } from '@material-ui/core'
 
-/*
-    TODO: This component will likely need an 'isAnswered' prop
-*/
 
 class QuestionCard extends Component {
 
   render () {
-    const { classes, author, question, id } = this.props;
+    const { classes, question, isAnswered, id } = this.props
+    const { timestamp, optionOneText, optionTwoText, avatarURL, authorName } = question
 
     return (
       <Card className={classes.card}>
          <CardHeader
           className={classes.header}
           avatar={
-            <Avatar src={author.avatarURL} className={classes.avatar}/>
+            <Avatar src={avatarURL} className={classes.avatar}/>
           }
-          title={<Typography variant="h4">{`${author.name} asks: `}</Typography>}
-          subheader={formatDate(question.timestamp)}
+          title={<Typography variant="h4">{`${authorName} asks: `}</Typography>}
+          subheader={formatDate(timestamp)}
         />
         <Divider variant='middle' />
         <CardContent>
@@ -41,18 +39,18 @@ class QuestionCard extends Component {
           </Typography>
           <Paper className={classes.option}>
             <Typography variant="h6">
-              {question.optionOne.text}
+              {optionOneText}
             </Typography>
           </Paper>
           <Paper className={classes.option}>
             <Typography variant="h6">
-              {question.optionTwo.text}
+              {optionTwoText}
             </Typography>
           </Paper>
         </CardContent>
         <CardActions>
           <Button component={Link} to={`/question/${id}`} className={classes.button}>
-            Vote {/* TODO: Change to 'View Poll' if question has been answered */}
+            {isAnswered ? 'View Poll' : 'Vote'}
           </Button>
         </CardActions>
       </Card>
@@ -87,16 +85,15 @@ const styles = theme => ({
   }
 });
 
-// TODO: handle case where question doesn't exist
-// TODO: limit question data to whatever is necessary for rendering (see chirper app)
-function mapStateToProps ({ questions, users }, { id }) {
+function mapStateToProps ({ questions, users, authedUser }, { id }) {
   const question = questions[id]
-  const author = users[question.author]
+  const author = question ? users[question.author] : null
+  const currentUser = users[authedUser]
   
   return {
     id,
-    question,
-    author
+    question: question ? formatQuestion(question, author) : null,
+    isAnswered: currentUser.answers.hasOwnProperty(id)
   }
 }
 
