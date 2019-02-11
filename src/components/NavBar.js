@@ -73,36 +73,30 @@ class NavBar extends Component {
             <Link to='/leaderboard'><MenuItem onClick={this.handleNavClose}>Leaderboard</MenuItem></Link>
           </Menu>
           <div className={classes.grow} />
-          <div className={classes.userInfo}>
-            <Typography variant='h5'>{userName}</Typography>
-            {avatar
-              ? <Avatar className={classes.avatar} src={avatar} />
-              : null
-            }
-            {userName
-              ? <Fragment>
-                  <IconButton onClick={this.handleLogoutMenu}>
-                    <ArrowIcon />
-                  </IconButton>
-                  <Menu
-                    anchorEl={logoutAnchor}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={logoutOpen}
-                    onClose={this.handleLogoutClose}
-                  >
-                    <MenuItem onClick={this.handleLogout}>Sign Out</MenuItem>
-                  </Menu>
-                </Fragment>
-              : null
-            }
-          </div>
+          {userName
+            ? <div className={classes.userInfo}>
+                <Typography variant='h5'>{userName}</Typography>
+                <Avatar className={classes.avatar} src={avatar} />
+                <IconButton onClick={this.handleLogoutMenu}>
+                  <ArrowIcon />
+                </IconButton>
+                <Menu
+                  anchorEl={logoutAnchor}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={logoutOpen}
+                  onClose={this.handleLogoutClose}
+                >
+                  <MenuItem onClick={this.handleLogout}>Sign Out</MenuItem>
+                </Menu>
+              </div>
+            : null}
         </Toolbar>
       </AppBar>
     )
