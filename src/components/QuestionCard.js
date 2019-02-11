@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, CardHeader, Avatar, CardContent, Typography, Divider, Paper, CardActions, Button } from '@material-ui/core'
-import withStyles from '@material-ui/core/styles/withStyles'
+import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
+import {
+  Card,
+  CardHeader,
+  Avatar,
+  CardContent,
+  Typography,
+  Divider,
+  Paper,
+  CardActions,
+  Button,
+  withStyles
+} from '@material-ui/core'
 
 /*
     TODO: This component will likely need an 'isAnswered' prop
@@ -11,7 +22,7 @@ import { formatDate } from '../utils/helpers'
 class QuestionCard extends Component {
 
   render () {
-    const { classes, author, question } = this.props;
+    const { classes, author, question, id } = this.props;
 
     return (
       <Card className={classes.card}>
@@ -23,7 +34,7 @@ class QuestionCard extends Component {
           title={<Typography variant="h4">{`${author.name} asks: `}</Typography>}
           subheader={formatDate(question.timestamp)}
         />
-        <Divider />
+        <Divider variant='middle' />
         <CardContent>
           <Typography variant="h5" className={classes.center}>
             Would You Rather . . .
@@ -40,7 +51,7 @@ class QuestionCard extends Component {
           </Paper>
         </CardContent>
         <CardActions>
-          <Button className={classes.button}>
+          <Button component={Link} to={`/question/${id}`} className={classes.button}>
             Vote {/* TODO: Change to 'View Poll' if question has been answered */}
           </Button>
         </CardActions>
@@ -76,11 +87,14 @@ const styles = theme => ({
   }
 });
 
+// TODO: handle case where question doesn't exist
+// TODO: limit question data to whatever is necessary for rendering (see chirper app)
 function mapStateToProps ({ questions, users }, { id }) {
   const question = questions[id]
   const author = users[question.author]
   
   return {
+    id,
     question,
     author
   }

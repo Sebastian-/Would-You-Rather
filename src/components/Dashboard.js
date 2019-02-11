@@ -6,7 +6,7 @@ import QuestionCard from './QuestionCard';
 import QuestionPoll from './QuestionPoll';
 
 /*
-  TODO: style the ans/unanswered tab
+  TODO: style the ans/unanswered tab, make this component less wide
 */
 
 const styles = theme => ({

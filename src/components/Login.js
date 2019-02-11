@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   Paper,
   Typography,
@@ -16,7 +17,8 @@ import { setAuthUser } from '../actions/authedUser'
 
 class Login extends Component {
   state = {
-    userID: ''
+    userID: '',
+    redirectToReferrer: false
   }
 
   handleChange = event => {
@@ -27,14 +29,22 @@ class Login extends Component {
     event.preventDefault()
     const { userID } = this.state
 
-    if (userID === '') 
-      return
-    else
-      this.props.dispatch(setAuthUser(userID))
+    this.props.dispatch(setAuthUser(userID))
+    this.setState({
+      redirectToReferrer: true
+    })
   }
   
   render () {
+    const { from } = this.props.location.state || { from: { pathname: "/" } }
     const { users, classes } = this.props
+    const { userID, redirectToReferrer } = this.state
+
+    if (redirectToReferrer) {
+      return (
+        <Redirect to={from} />
+      )
+    }
 
     return (
       <Paper className={classes.paper}>
@@ -61,7 +71,10 @@ class Login extends Component {
               ))}
             </Select>
           </FormControl>
-          <Button fullWidth={true} type='submit'>Sign In</Button>
+          <Button
+            disabled={userID === ''}
+            fullWidth={true}
+            type='submit'>Sign In</Button>
         </form>
       </Paper>
     )

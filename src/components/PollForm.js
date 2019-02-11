@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   withStyles 
 } from '@material-ui/core'
-import { handleQuestionResponse } from '../actions/shared';
+import { handleAddAnswer } from '../actions/shared';
 
 
 class PollForm extends Component {
@@ -30,7 +30,7 @@ class PollForm extends Component {
     if (value === '')
       return
     else
-      dispatch(handleQuestionResponse({
+      dispatch(handleAddAnswer({
         qid: id,
         answer: value,
         authedUser,
@@ -81,7 +81,8 @@ const styles = theme => ({
   }
 });
 
-function mapStateToProps ({ questions, authedUser }, {id}) {
+function mapStateToProps ({ questions, authedUser }, { id }) {
+  console.log(id)
   return {
     authedUser: authedUser,
     optionOne: questions[id].optionOne.text,

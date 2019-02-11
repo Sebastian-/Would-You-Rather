@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -7,9 +8,10 @@ import {
   Typography,
   Menu,
   MenuItem,
-  Avatar
+  Avatar,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import AccountIcon from '@material-ui/icons/AccountCircle'
 
 class NavBar extends Component {
   state = {
@@ -49,12 +51,12 @@ class NavBar extends Component {
               open={open}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose}>Home</MenuItem>
-              <MenuItem onClick={this.handleClose}>New Question</MenuItem>
-              <MenuItem onClick={this.handleClose}>Leaderboard</MenuItem>
+              <Link to='/'><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
+              <Link to='/add'><MenuItem onClick={this.handleClose}>New Question</MenuItem></Link>
+              <Link to='/leaderboard'><MenuItem onClick={this.handleClose}>Leaderboard</MenuItem></Link>
             </Menu>
           </div>
-          <Avatar src={avatar} />
+          {avatar ? <Avatar src={avatar} /> : <AccountIcon />}
           <Typography variant='h5'>{userName}</Typography>
         </Toolbar>
       </AppBar>
@@ -65,10 +67,12 @@ class NavBar extends Component {
 function mapStateToProps ({ users, authedUser }) {
   const user = users[authedUser]
 
-  return {
-    userName: user.name,
-    avatar: user.avatarURL
-  }
+  return user
+    ? {
+      userName: user.name,
+      avatar: user.avatarURL
+    }
+    : {}
 }
 
 export default connect(mapStateToProps)(NavBar)

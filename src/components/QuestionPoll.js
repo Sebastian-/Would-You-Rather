@@ -61,12 +61,14 @@ const styles = theme => ({
 
 // TODO: handle case where question doesn't exist
 // TODO: limit question data to whatever is necessary for rendering (see chirper app)
-function mapStateToProps ({ questions, users, authedUser }, { id }) {
+function mapStateToProps ({ questions, users, authedUser }, props) {
+  const { id } = props.match.params
   const question = questions[id]
   const author = users[question.author]
   const answer = users[authedUser].answers[id] || ''
   
   return {
+    id,
     question,
     author,
     answer

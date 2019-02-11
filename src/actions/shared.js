@@ -12,7 +12,6 @@ export function handleInitialData () {
       .then(({ questions, users }) => {
         dispatch(receiveQuestions(questions))
         dispatch(receiveUsers(users))
-        dispatch(setAuthUser('tylermcginnis'))
       })
   }
 }
