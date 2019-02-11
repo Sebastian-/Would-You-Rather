@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { formatDate, formatQuestion } from '../utils/helpers'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { formatDate, formatQuestion } from '../utils/helpers';
 import {
   Card,
   CardHeader,
@@ -13,18 +13,18 @@ import {
   CardActions,
   Button,
   withStyles
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 
 class QuestionCard extends Component {
 
   render () {
-    const { classes, question, isAnswered, id } = this.props
-    const { timestamp, optionOneText, optionTwoText, avatarURL, authorName } = question
+    const { classes, question, isAnswered, id } = this.props;
+    const { timestamp, optionOneText, optionTwoText, avatarURL, authorName } = question;
 
     return (
       <Card className={classes.card}>
-         <CardHeader
+        <CardHeader
           className={classes.header}
           avatar={
             <Avatar src={avatarURL} className={classes.avatar}/>
@@ -54,7 +54,7 @@ class QuestionCard extends Component {
           </Button>
         </CardActions>
       </Card>
-    )
+    );
   }
 
 }
@@ -86,15 +86,15 @@ const styles = theme => ({
 });
 
 function mapStateToProps ({ questions, users, authedUser }, { id }) {
-  const question = questions[id]
-  const author = question ? users[question.author] : null
-  const currentUser = users[authedUser]
+  const question = questions[id];
+  const author = question ? users[question.author] : null;
+  const currentUser = users[authedUser];
   
   return {
     id,
     question: question ? formatQuestion(question, author) : null,
     isAnswered: currentUser.answers.hasOwnProperty(id)
-  }
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(QuestionCard))
+export default connect(mapStateToProps)(withStyles(styles)(QuestionCard));

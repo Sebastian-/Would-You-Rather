@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { 
   CardContent,
   Typography,
   Paper,
   withStyles 
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 
 class PollResults extends Component {
 
   render () {
     const { classes, optionOne, optionTwo, answer } = this.props;
-    const totalVotes = optionOne.votes.length + optionTwo.votes.length
-    const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100)
-    const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100)
-    console.log(classes.selected)
+    const totalVotes = optionOne.votes.length + optionTwo.votes.length;
+    const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100);
+    const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100);
 
     return (
       <CardContent>
@@ -53,7 +52,7 @@ class PollResults extends Component {
           </Typography>
         </Paper>
       </CardContent>
-    )
+    );
   }
 
 }
@@ -95,4 +94,4 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(PollResults)
+export default withStyles(styles)(PollResults);

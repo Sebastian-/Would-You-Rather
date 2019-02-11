@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   Paper,
   Typography,
@@ -9,8 +9,8 @@ import {
   Divider,
   withStyles,
   Button
-} from '@material-ui/core'
-import { handleAddQuestion } from '../actions/shared'
+} from '@material-ui/core';
+import { handleAddQuestion } from '../actions/shared';
 
 
 class NewQuestion extends Component {
@@ -26,24 +26,24 @@ class NewQuestion extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault()
-    const { optionOne, optionTwo } = this.state
-    const { dispatch } = this.props
+    event.preventDefault();
+    const { optionOne, optionTwo } = this.state;
+    const { dispatch } = this.props;
 
-    dispatch(handleAddQuestion(optionOne, optionTwo))
+    dispatch(handleAddQuestion(optionOne, optionTwo));
 
     this.setState({
       optionOne: '',
       optionTwo: '',
       toHome: true
-    })
+    });
   }
 
   render () {
-    const { classes } = this.props
+    const { classes } = this.props;
 
     if (this.state.toHome) {
-      return <Redirect to='/' />
+      return <Redirect to='/' />;
     }
 
     return (
@@ -88,7 +88,7 @@ class NewQuestion extends Component {
           <Button className={classes.button} type='submit'>Post Question</Button>
         </form>
       </Paper>
-    )
+    );
   }
 }
 
@@ -112,4 +112,4 @@ const styles = theme => ({
   }
 });
 
-export default connect()(withStyles(styles)(NewQuestion))
+export default connect()(withStyles(styles)(NewQuestion));

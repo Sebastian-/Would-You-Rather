@@ -3,7 +3,7 @@ import {
   _getQuestions,
   _saveQuestionAnswer,
   _saveQuestion
-} from './_DATA'
+} from './_DATA';
 
 export function getInitialData() {
   return Promise.all([
@@ -12,7 +12,7 @@ export function getInitialData() {
   ]).then(([ questions, users ]) => ({
     questions,
     users
-  }))
+  }));
 }
 
 /**
@@ -21,7 +21,7 @@ export function getInitialData() {
  * answer is either 'optionOne' or 'optionTwo'
  */
 export function saveQuestionAnswer(info) {
-  return _saveQuestionAnswer(info)
+  return _saveQuestionAnswer(info);
 }
 
 /**
@@ -29,5 +29,5 @@ export function saveQuestionAnswer(info) {
  * @param {optionOneText, optionTwoText, author} info
  */
 export function saveQuestion(info) {
-  return _saveQuestion(info)
+  return _saveQuestion(info);
 }

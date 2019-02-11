@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { List, withStyles, Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { List, withStyles, Typography } from '@material-ui/core';
 import LeaderboardEntry from './LeaderboardEntry';
 
 
 class Leaderboard extends Component {
 
   render () {
-    const { classes, scores } = this.props
-    console.log(this.props)
+    const { classes, scores } = this.props;
 
     return (
       <div className={classes.container}>
@@ -24,7 +23,7 @@ class Leaderboard extends Component {
           ))}
         </List>
       </div>
-    )
+    );
   }
 }
 
@@ -35,12 +34,12 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center'
   }
-}
+};
 
 function mapStateToProps ({ users }) {
   
   const scores = Object.keys(users).map((userID) => {
-    const user = users[userID]
+    const user = users[userID];
     
     return {
       id: userID,
@@ -48,14 +47,14 @@ function mapStateToProps ({ users }) {
       avatar: user.avatarURL,
       asked: user.questions.length,
       answered: Object.keys(user.answers).length
-    }
-  })
+    };
+  });
 
-  scores.sort((a, b) => (a.asked + a.answered) < (b.asked + b.answered))
+  scores.sort((a, b) => (a.asked + a.answered) < (b.asked + b.answered));
 
   return {
     scores
-  }
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Leaderboard))
+export default connect(mapStateToProps)(withStyles(styles)(Leaderboard));

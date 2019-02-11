@@ -1,11 +1,11 @@
 export function formatDate(timestamp) {
-  const d = new Date(timestamp)
-  return d.toLocaleDateString()
+  const d = new Date(timestamp);
+  return d.toLocaleDateString();
 }
 
 export function formatQuestion(question, author) {
-  const { timestamp, optionOne, optionTwo } = question
-  const { avatarURL, name } = author
+  const { timestamp, optionOne, optionTwo } = question;
+  const { avatarURL, name } = author;
 
   return {
     timestamp,
@@ -13,5 +13,5 @@ export function formatQuestion(question, author) {
     optionTwoText: optionTwo.text,
     avatarURL,
     authorName: name
-  }
+  };
 }

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { Paper, List, Tab, Tabs } from '@material-ui/core'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Paper, List, Tab, Tabs } from '@material-ui/core';
 import QuestionCard from './QuestionCard';
 
 class Dashboard extends Component {
@@ -38,7 +38,7 @@ class Dashboard extends Component {
           ))}
         </List>
       </Fragment>
-    )
+    );
   }
 
 }
@@ -47,7 +47,7 @@ function mapStateToProps ({ questions, authedUser }) {
   const IDs = {
     answeredIDs: [],
     unansweredIDs: []
-  }
+  };
 
   Object.keys(questions)
     .sort((a, b) => (questions[a].timestamp < questions[b].timestamp))
@@ -56,14 +56,14 @@ function mapStateToProps ({ questions, authedUser }) {
         questions[id].optionOne.votes.indexOf(authedUser) !== -1 
         || questions[id].optionTwo.votes.indexOf(authedUser) !== -1
       ) {
-        acc.answeredIDs.push(id)
+        acc.answeredIDs.push(id);
       } else {
-        acc.unansweredIDs.push(id)
+        acc.unansweredIDs.push(id);
       }
-      return acc
-    }, IDs)
+      return acc;
+    }, IDs);
 
-  return IDs
+  return IDs;
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Dashboard);

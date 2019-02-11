@@ -1,19 +1,19 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { withRouter, Route, Switch } from 'react-router-dom'
-import { handleInitialData } from '../actions/shared'
-import { withStyles, CssBaseline } from '@material-ui/core'
-import Dashboard from './Dashboard'
-import Leaderboard from './Leaderboard'
-import NewQuestion from './NewQuestion'
-import Login from './Login'
-import NavBar from './NavBar'
-import QuestionPoll from './QuestionPoll'
-import PrivateRoute from './PrivateRoute'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch } from 'react-router-dom';
+import { handleInitialData } from '../actions/shared';
+import { withStyles, CssBaseline } from '@material-ui/core';
+import Dashboard from './Dashboard';
+import Leaderboard from './Leaderboard';
+import NewQuestion from './NewQuestion';
+import Login from './Login';
+import NavBar from './NavBar';
+import QuestionPoll from './QuestionPoll';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
   componentDidMount () {
-    this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleInitialData());
   }
 
   render() {
@@ -44,6 +44,6 @@ const styles = (theme) => ({
     maxWidth:'800px',
     padding: theme.spacing.unit
   }
-})
+});
 
-export default withRouter(withStyles(styles)(connect()(App)))
+export default withRouter(withStyles(styles)(connect()(App)));

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -10,9 +10,9 @@ import {
   MenuItem,
   Avatar,
   withStyles
-} from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
-import ArrowIcon from '@material-ui/icons/ArrowDropDown'
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import ArrowIcon from '@material-ui/icons/ArrowDropDown';
 import { setAuthUser } from '../actions/authedUser';
 
 class NavBar extends Component {
@@ -22,11 +22,11 @@ class NavBar extends Component {
   }
 
   handleNavMenu = event => {
-    this.setState({ navAnchor: event.currentTarget })
+    this.setState({ navAnchor: event.currentTarget });
   }
 
   handleLogoutMenu = (event) => {
-    this.setState({ logoutAnchor: event.currentTarget })
+    this.setState({ logoutAnchor: event.currentTarget });
   }
   
   handleNavClose = () => {
@@ -38,16 +38,16 @@ class NavBar extends Component {
   }
 
   handleLogout = () => {
-    this.setState({ logoutAnchor: null })
-    this.props.dispatch(setAuthUser(null))
-    this.props.history.push('/')
+    this.setState({ logoutAnchor: null });
+    this.props.dispatch(setAuthUser(null));
+    this.props.history.push('/');
   }
 
   render() {
-    const { userName, avatar, classes } = this.props
-    const { navAnchor, logoutAnchor } = this.state
-    const navOpen = Boolean(navAnchor)
-    const logoutOpen = Boolean(logoutAnchor)
+    const { userName, avatar, classes } = this.props;
+    const { navAnchor, logoutAnchor } = this.state;
+    const navOpen = Boolean(navAnchor);
+    const logoutOpen = Boolean(logoutAnchor);
 
     return (
       <AppBar>
@@ -73,33 +73,33 @@ class NavBar extends Component {
             <Link to='/leaderboard'><MenuItem onClick={this.handleNavClose}>Leaderboard</MenuItem></Link>
           </Menu>
           <div className={classes.grow} />
-          {userName
-            ? <div className={classes.userInfo}>
-                <Typography variant='h5'>{userName}</Typography>
-                <Avatar className={classes.avatar} src={avatar} />
-                <IconButton onClick={this.handleLogoutMenu}>
-                  <ArrowIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={logoutAnchor}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={logoutOpen}
-                  onClose={this.handleLogoutClose}
-                >
-                  <MenuItem onClick={this.handleLogout}>Sign Out</MenuItem>
-                </Menu>
-              </div>
+          {userName ? 
+            <div className={classes.userInfo}>
+              <Typography variant='h5'>{userName}</Typography>
+              <Avatar className={classes.avatar} src={avatar} />
+              <IconButton onClick={this.handleLogoutMenu}>
+                <ArrowIcon />
+              </IconButton>
+              <Menu
+                anchorEl={logoutAnchor}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={logoutOpen}
+                onClose={this.handleLogoutClose}
+              >
+                <MenuItem onClick={this.handleLogout}>Sign Out</MenuItem>
+              </Menu>
+            </div>
             : null}
         </Toolbar>
       </AppBar>
-    )
+    );
   }
 }
 
@@ -120,17 +120,17 @@ const styles = {
     marginLeft: 10,
     marginRight: 10
   }
-}
+};
 
 function mapStateToProps ({ users, authedUser }) {
-  const user = users[authedUser]
+  const user = users[authedUser];
 
   return user
     ? {
       userName: user.name,
       avatar: user.avatarURL
     }
-    : {}
+    : {};
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(NavBar))
+export default withStyles(styles)(connect(mapStateToProps)(NavBar));

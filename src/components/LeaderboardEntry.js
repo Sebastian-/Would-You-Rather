@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import {
   Paper,
   Avatar,
   Typography,
   withStyles
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 function LeaderboardEntry (props) {
-  const { name, avatar, answered, asked, classes } = props
+  const { name, avatar, answered, asked, classes } = props;
 
   return (
     <Paper className={classes.paper}>
@@ -21,7 +21,7 @@ function LeaderboardEntry (props) {
         <Avatar className={classes.scoreAvatar}>{answered + asked}</Avatar>
       </div>
     </Paper>
-  )
+  );
 }
 
 const styles = theme => ({
@@ -52,6 +52,6 @@ const styles = theme => ({
     width: 50,
     height: 50
   }
-})
+});
 
-export default withStyles(styles)(LeaderboardEntry)
+export default withStyles(styles)(LeaderboardEntry);

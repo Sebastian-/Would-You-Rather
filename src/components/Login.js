@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   Paper,
   Typography,
@@ -11,9 +11,9 @@ import {
   MenuItem,
   Button,
   withStyles
-} from '@material-ui/core'
-import LockIcon from '@material-ui/icons/Lock'
-import { setAuthUser } from '../actions/authedUser'
+} from '@material-ui/core';
+import LockIcon from '@material-ui/icons/Lock';
+import { setAuthUser } from '../actions/authedUser';
 
 class Login extends Component {
   state = {
@@ -22,28 +22,28 @@ class Login extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = event => {
-    event.preventDefault()
-    const { userID } = this.state
+    event.preventDefault();
+    const { userID } = this.state;
 
-    this.props.dispatch(setAuthUser(userID))
+    this.props.dispatch(setAuthUser(userID));
     this.setState({
       redirectToReferrer: true
-    })
+    });
   }
   
   render () {
-    const { from } = this.props.location.state || { from: { pathname: "/" } }
-    const { users, classes } = this.props
-    const { userID, redirectToReferrer } = this.state
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { users, classes } = this.props;
+    const { userID, redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
       return (
         <Redirect to={from} />
-      )
+      );
     }
 
     return (
@@ -77,7 +77,7 @@ class Login extends Component {
             type='submit'>Sign In</Button>
         </form>
       </Paper>
-    )
+    );
   }
 }
 
@@ -118,7 +118,7 @@ const styles = theme => ({
       flexBasis: '1'
     }
   }
-})
+});
 
 function mapStateToProps ({ users }) {
   return {
@@ -127,7 +127,7 @@ function mapStateToProps ({ users }) {
       name: users[id].name,
       avatar: users[id].avatarURL
     }))
-  }
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Login))
+export default connect(mapStateToProps)(withStyles(styles)(Login));

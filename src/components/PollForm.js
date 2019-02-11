@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   CardContent,
   Typography,
@@ -8,7 +8,7 @@ import {
   RadioGroup,
   FormControlLabel,
   withStyles 
-} from '@material-ui/core'
+} from '@material-ui/core';
 import { handleAddAnswer } from '../actions/shared';
 
 
@@ -23,20 +23,20 @@ class PollForm extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault()
-    const { value } = this.state
-    const { authedUser, id, dispatch } = this.props
+    event.preventDefault();
+    const { value } = this.state;
+    const { authedUser, id, dispatch } = this.props;
 
     dispatch(handleAddAnswer({
-        qid: id,
-        answer: value,
-        authedUser,
-    }))
+      qid: id,
+      answer: value,
+      authedUser,
+    }));
   }
 
   render () {
     const { classes, optionOne, optionTwo } = this.props;
-    const { value } = this.state
+    const { value } = this.state;
 
     return (
       <CardContent>
@@ -69,7 +69,7 @@ class PollForm extends Component {
           </Button>
         </form>
       </CardContent>
-    )
+    );
   }
 
 }
@@ -81,14 +81,14 @@ const styles = {
   button: {
     width: '100%'
   }
-}
+};
 
 function mapStateToProps ({ questions, authedUser }, { id }) {
   return {
     authedUser: authedUser,
     optionOne: questions[id].optionOne.text,
     optionTwo: questions[id].optionTwo.text
-  }
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(PollForm))
+export default connect(mapStateToProps)(withStyles(styles)(PollForm));

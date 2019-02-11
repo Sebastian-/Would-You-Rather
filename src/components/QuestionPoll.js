@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
   Card,
   CardHeader,
@@ -7,9 +7,9 @@ import {
   Typography,
   Divider,
   withStyles 
-} from '@material-ui/core'
-import PollForm from './PollForm'
-import PollResults from './PollResults'
+} from '@material-ui/core';
+import PollForm from './PollForm';
+import PollResults from './PollResults';
 
 
 class QuestionPoll extends Component {
@@ -18,14 +18,14 @@ class QuestionPoll extends Component {
     const { classes, id, answer, question } = this.props;
 
     if (question === null) {
-      return <h3>{`404: Question not found at /question/${id}`}</h3>
+      return <h3>{`404: Question not found at /question/${id}`}</h3>;
     }
 
-    const { optionOne, optionTwo, avatarURL, authorName } = question
+    const { optionOne, optionTwo, avatarURL, authorName } = question;
 
     return (
       <Card className={classes.card}>
-         <CardHeader
+        <CardHeader
           className={classes.header}
           avatar={
             <Avatar src={avatarURL} className={classes.avatar}/>
@@ -36,14 +36,14 @@ class QuestionPoll extends Component {
           }
         />
         <Divider />
-        {answer
-          ? <PollResults
-              answer={answer}
-              optionOne={optionOne}
-              optionTwo={optionTwo} />
+        {answer ? 
+          <PollResults
+            answer={answer}
+            optionOne={optionOne}
+            optionTwo={optionTwo} />
           : <PollForm id={id} />}
       </Card>
-    )
+    );
   }
 
 }
@@ -65,22 +65,22 @@ const styles = theme => ({
 });
 
 function mapStateToProps ({ questions, users, authedUser }, props) {
-  const { id } = props.match.params
-  const question = questions[id]
-  const answer = users[authedUser].answers[id] || ''
+  const { id } = props.match.params;
+  const question = questions[id];
+  const answer = users[authedUser].answers[id] || '';
   
   return {
     id,
     answer,
     question: question 
       ? {
-          optionOne: question.optionOne,
-          optionTwo: question.optionTwo,
-          avatarURL: users[question.author].avatarURL,
-          authorName: users[question.author].name
-        }
+        optionOne: question.optionOne,
+        optionTwo: question.optionTwo,
+        avatarURL: users[question.author].avatarURL,
+        authorName: users[question.author].name
+      }
       : null
-  }
+  };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(QuestionPoll))
+export default connect(mapStateToProps)(withStyles(styles)(QuestionPoll));
