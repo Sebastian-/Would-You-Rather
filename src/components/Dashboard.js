@@ -1,23 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Paper, List, Tab, Tabs } from '@material-ui/core'
-import withStyles from '@material-ui/core/styles/withStyles'
 import QuestionCard from './QuestionCard';
-import QuestionPoll from './QuestionPoll';
-
-/*
-  TODO: style the ans/unanswered tab, make this component less wide
-*/
-
-const styles = theme => ({
-  paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-  }
-});
 
 class Dashboard extends Component {
 
@@ -30,16 +14,17 @@ class Dashboard extends Component {
   }
 
   render () {
-    const { classes, answeredIDs, unansweredIDs } = this.props;
+    const { answeredIDs, unansweredIDs } = this.props;
 
     return (
-      <Paper className={classes.paper}>
+      <Fragment>
         <Paper square>
           <Tabs
             value={this.state.value}
-            indicatorColor="primary"
-            textColor="primary"
+            indicatorColor='primary'
+            textColor='primary'
             onChange={this.handleChange}
+            variant='fullWidth'
           >
             <Tab label="Unanswered" />
             <Tab label="Answered" />
@@ -52,7 +37,7 @@ class Dashboard extends Component {
             <QuestionCard key={id} id={id} />
           ))}
         </List>
-      </Paper>
+      </Fragment>
     )
   }
 
@@ -81,4 +66,4 @@ function mapStateToProps ({ questions, authedUser }) {
   return IDs
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Dashboard))
+export default connect(mapStateToProps)(Dashboard)

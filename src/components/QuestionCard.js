@@ -63,12 +63,12 @@ class QuestionCard extends Component {
 
 const styles = theme => ({ 
   card: {
-    margin: 20
+    marginTop: theme.spacing.unit
   },
   header: {
     paddingLeft: 30,
     paddingRight: 30,
-    backgroundColor: '#f7fdff'
+    backgroundColor: theme.palette.primary.light
   },
   avatar: {
     margin: 10,

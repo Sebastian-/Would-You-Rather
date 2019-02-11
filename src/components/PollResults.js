@@ -14,14 +14,12 @@ class PollResults extends Component {
     const totalVotes = optionOne.votes.length + optionTwo.votes.length
     const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100)
     const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100)
+    console.log(classes.selected)
 
     return (
       <CardContent>
         <Paper
-          className={classes.option}
-          style={(answer === 'optionOne')
-              ? {backgroundColor: '#b2dfdb', border: '5px solid black'}
-              : {}}>
+          className={(answer === 'optionOne') ? classes.selected : classes.option}>
           <Typography variant='h6'>
             {`Would you rather ${optionOne.text}?`}
           </Typography>
@@ -38,10 +36,7 @@ class PollResults extends Component {
           </Typography>
         </Paper>
         <Paper
-          className={classes.option}
-          style={(answer === 'optionTwo')
-              ? {backgroundColor: '#b2dfdb', border: '5px solid black'}
-              : {}}>
+          className={(answer === 'optionTwo') ? classes.selected : classes.option}>
           <Typography variant='h6'>
             {`Would you rather ${optionTwo.text}?`}
           </Typography>
@@ -73,16 +68,13 @@ const styles = theme => ({
   },
   voteBar: {
     padding: 5,
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 5,
-    marginTop: 10,
-    backgroundColor: '#b4b9bd',
+    margin: '10px 20px 5px 20px',
+    backgroundColor: theme.palette.grey[400],
     position: 'relative',
     borderRadius: 5
   },
   voteBarFill: {
-    backgroundColor: '#307699',
+    backgroundColor: theme.palette.primary.dark,
     height: '100%',
     position: 'absolute',
     top: 0,
@@ -94,6 +86,12 @@ const styles = theme => ({
     color: '#fff',
     position: 'relative',
     zIndex: '1'
+  },
+  selected: {
+    backgroundColor: theme.palette.primary.light,
+    border: `3px solid ${theme.palette.primary.main}`,
+    padding: 10,
+    margin: 10
   }
 });
 

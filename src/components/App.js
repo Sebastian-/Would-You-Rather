@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
-import { withStyles } from '@material-ui/core'
+import { withStyles, CssBaseline } from '@material-ui/core'
 import Dashboard from './Dashboard'
 import Leaderboard from './Leaderboard'
 import NewQuestion from './NewQuestion'
@@ -19,6 +19,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        <CssBaseline />
         <Route component={NavBar} />
         <div className={this.props.classes.container}>
           <Switch>
@@ -37,11 +38,12 @@ class App extends Component {
   }
 }
 
-const styles = {
+const styles = (theme) => ({
   container: {
-    margin: '70px auto 0px auto',
-    maxWidth:'800px'
+    margin: '64px auto 0px auto',
+    maxWidth:'800px',
+    padding: theme.spacing.unit
   }
-}
+})
 
 export default withRouter(withStyles(styles)(connect()(App)))

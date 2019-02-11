@@ -27,18 +27,16 @@ class PollForm extends Component {
     const { value } = this.state
     const { authedUser, id, dispatch } = this.props
 
-    if (value === '')
-      return
-    else
-      dispatch(handleAddAnswer({
+    dispatch(handleAddAnswer({
         qid: id,
         answer: value,
         authedUser,
-      }))
+    }))
   }
 
   render () {
     const { classes, optionOne, optionTwo } = this.props;
+    const { value } = this.state
 
     return (
       <CardContent>
@@ -48,7 +46,7 @@ class PollForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <RadioGroup
             name="pollOptions"
-            value={this.state.value}
+            value={value}
             onChange={this.handleChange}
           >
             <FormControlLabel 
@@ -62,7 +60,11 @@ class PollForm extends Component {
               label={<Typography variant="h6">{optionTwo}</Typography>}
             />
           </RadioGroup>
-          <Button className={classes.button} type='submit'>
+          <Button 
+            className={classes.button}
+            disabled={value === ''}
+            type='submit'
+          >
             Submit
           </Button>
         </form>
@@ -72,17 +74,16 @@ class PollForm extends Component {
 
 }
 
-const styles = theme => ({
+const styles = {
   center: {
     textAlign: 'center'
   },
   button: {
     width: '100%'
   }
-});
+}
 
 function mapStateToProps ({ questions, authedUser }, { id }) {
-  console.log(id)
   return {
     authedUser: authedUser,
     optionOne: questions[id].optionOne.text,

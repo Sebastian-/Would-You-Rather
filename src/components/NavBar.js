@@ -109,7 +109,7 @@ class NavBar extends Component {
   }
 }
 
-const styles = theme => ({
+const styles = {
   grow: {
     flexGrow: 1,
   },
@@ -126,7 +126,7 @@ const styles = theme => ({
     marginLeft: 10,
     marginRight: 10
   }
-})
+}
 
 function mapStateToProps ({ users, authedUser }) {
   const user = users[authedUser]

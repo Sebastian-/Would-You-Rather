@@ -83,7 +83,6 @@ class Login extends Component {
 
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing.unit * 8,
     margin: 'auto',
     maxWidth: 500,
     display: 'flex',

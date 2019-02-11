@@ -28,23 +28,24 @@ const styles = theme => ({
   paper: {
     display: 'flex',
     alignItems: 'center',
-    margin: 20
+    margin: 20,
+    padding: theme.spacing.unit * 2
   },
   userAvatar: {
-    margin: 15,
     width: 70,
     height: 70
   },
   info: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingRight: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 2
   },
   score: {
-    margin: 15,
-    padding: '10px 10px 10px 20px',
+    paddingLeft: theme.spacing.unit * 2,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    borderLeft: '1px solid grey'
+    borderLeft: `2px solid ${theme.palette.grey[400]}`
   },
   scoreAvatar: {
     marginTop: 10,

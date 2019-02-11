@@ -49,7 +49,7 @@ const styles = theme => ({
   header: {
     paddingLeft: 30,
     paddingRight: 30,
-    backgroundColor: '#f7fdff'
+    backgroundColor: theme.palette.primary.light
   },
   avatar: {
     margin: 10,

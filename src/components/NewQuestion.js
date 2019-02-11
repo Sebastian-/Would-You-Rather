@@ -41,7 +41,13 @@ class NewQuestion extends Component {
 
     return (
       <Paper className={classes.paper}>
-        <Typography variant='h4' className={classes.center}>Create A New Question</Typography>
+        <Typography
+          variant='h4'
+          className={classes.center}
+          gutterBottom
+        >
+          Create A New Question
+        </Typography>
         <Divider variant='middle'/>
         <Typography variant='h5'>Would you rather . . .</Typography>
         <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -81,7 +87,6 @@ class NewQuestion extends Component {
 
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing.unit * 8,
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
   center: {
@@ -90,7 +95,7 @@ const styles = theme => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textField: {
     width: '100%'
