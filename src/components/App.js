@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
+import { withStyles } from '@material-ui/core'
 import Dashboard from './Dashboard'
 import Leaderboard from './Leaderboard'
 import NewQuestion from './NewQuestion'
@@ -17,18 +18,30 @@ class App extends Component {
 
   render() {
     return (
-        <div style={{margin: '0 auto'}}>
-          <Route component={NavBar} />
+      <Fragment>
+        <Route component={NavBar} />
+        <div className={this.props.classes.container}>
           <Switch>
             <Route path='/login' component={Login} />
             <PrivateRoute exact path='/' component={Dashboard} />
             <PrivateRoute path='/add' component={NewQuestion} />
             <PrivateRoute path='/question/:id' component={QuestionPoll} />
             <PrivateRoute path='/leaderboard' component={Leaderboard} />
+            <Route component={({ location }) => 
+              <h3>{`404: Nothing found at ${location.pathname}`}</h3>}
+            />
           </Switch>
         </div>
+      </Fragment>
     );
   }
 }
 
-export default withRouter(connect()(App))
+const styles = {
+  container: {
+    margin: '70px auto 0px auto',
+    maxWidth:'800px'
+  }
+}
+
+export default withRouter(withStyles(styles)(connect()(App)))
