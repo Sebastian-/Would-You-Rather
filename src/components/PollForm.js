@@ -25,13 +25,9 @@ class PollForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { value } = this.state;
-    const { authedUser, id, dispatch } = this.props;
+    const { authedUser, id, addAnswer } = this.props;
 
-    dispatch(handleAddAnswer({
-      qid: id,
-      answer: value,
-      authedUser,
-    }));
+    addAnswer(id, value, authedUser);
   }
 
   render () {
@@ -83,6 +79,18 @@ const styles = {
   }
 };
 
+function mapDispatchToProps (dispatch) {
+  return ({
+    addAnswer: (qid, answer, authedUser) => {
+      dispatch(handleAddAnswer({
+        qid,
+        answer,
+        authedUser,
+      }));
+    }
+  });
+}
+
 function mapStateToProps ({ questions, authedUser }, { id }) {
   return {
     authedUser: authedUser,
@@ -91,4 +99,4 @@ function mapStateToProps ({ questions, authedUser }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(PollForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PollForm));

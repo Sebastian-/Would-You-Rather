@@ -39,7 +39,7 @@ class NavBar extends Component {
 
   handleLogout = () => {
     this.setState({ logoutAnchor: null });
-    this.props.dispatch(setAuthUser(null));
+    this.props.setAuthUser(null);
     this.props.history.push('/');
   }
 
@@ -122,6 +122,14 @@ const styles = {
   }
 };
 
+function mapDispatchToProps (dispatch) {
+  return ({
+    setAuthUser: (userID) => {
+      dispatch(setAuthUser(userID));
+    }
+  });
+}
+
 function mapStateToProps ({ users, authedUser }) {
   const user = users[authedUser];
 
@@ -133,4 +141,4 @@ function mapStateToProps ({ users, authedUser }) {
     : {};
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(NavBar));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(NavBar));

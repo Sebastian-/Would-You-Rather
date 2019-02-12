@@ -29,7 +29,7 @@ class Login extends Component {
     event.preventDefault();
     const { userID } = this.state;
 
-    this.props.dispatch(setAuthUser(userID));
+    this.props.setAuthUser(userID);
     this.setState({
       redirectToReferrer: true
     });
@@ -120,6 +120,14 @@ const styles = theme => ({
   }
 });
 
+function mapDispatchToProps (dispatch) {
+  return ({
+    setAuthUser: (userID) => {
+      dispatch(setAuthUser(userID));
+    }
+  });
+}
+
 function mapStateToProps ({ users }) {
   return {
     users: Object.keys(users).map((id) => ({
@@ -130,4 +138,4 @@ function mapStateToProps ({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

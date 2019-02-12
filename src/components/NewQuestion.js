@@ -28,9 +28,9 @@ class NewQuestion extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    const { dispatch } = this.props;
+    const { addQuestion } = this.props;
 
-    dispatch(handleAddQuestion(optionOne, optionTwo));
+    addQuestion(optionOne, optionTwo);
 
     this.setState({
       optionOne: '',
@@ -112,4 +112,15 @@ const styles = theme => ({
   }
 });
 
-export default connect()(withStyles(styles)(NewQuestion));
+function mapDispatchToProps (dispatch) {
+  return ({
+    addQuestion: (optionOne, optionTwo) => {
+      dispatch(handleAddQuestion(
+        optionOne,
+        optionTwo
+      ));
+    }
+  });
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(NewQuestion));
