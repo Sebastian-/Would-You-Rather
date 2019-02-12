@@ -1,9 +1,7 @@
 import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/API';
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
-
-export const ADD_ANSWER = 'ADD_USER_ANSWER';
-export const ADD_QUESTION = 'ADD_QUESTION';
+import { ADD_ANSWER, ADD_QUESTION } from './types';
 
 export function handleInitialData () {
   return (dispatch) => {

@@ -1,5 +1,4 @@
-import { RECEIVE_USERS } from '../actions/users';
-import { ADD_ANSWER, ADD_QUESTION } from '../actions/shared';
+import { RECEIVE_USERS, ADD_ANSWER, ADD_QUESTION } from '../actions/types';
 
 export default function users (state = {}, action) {
   switch (action.type) {
