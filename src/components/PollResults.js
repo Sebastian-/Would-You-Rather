@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   CardContent,
   Typography,
@@ -6,56 +6,51 @@ import {
   withStyles 
 } from '@material-ui/core';
 
+const PollResults = (props) => {
+  const { classes, optionOne, optionTwo, answer } = props;
+  const totalVotes = optionOne.votes.length + optionTwo.votes.length;
+  const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100);
+  const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100);
 
-class PollResults extends Component {
-
-  render () {
-    const { classes, optionOne, optionTwo, answer } = this.props;
-    const totalVotes = optionOne.votes.length + optionTwo.votes.length;
-    const optionOnePercent = Math.round((optionOne.votes.length/totalVotes) * 100);
-    const optionTwoPercent = Math.round((optionTwo.votes.length/totalVotes) * 100);
-
-    return (
-      <CardContent>
-        <Paper
-          className={(answer === 'optionOne') ? classes.selected : classes.option}>
-          <Typography variant='h6'>
-            {`Would you rather ${optionOne.text}?`}
+  return (
+    <CardContent>
+      <Paper
+        className={(answer === 'optionOne') ? classes.selected : classes.option}>
+        <Typography variant='h6'>
+          {`Would you rather ${optionOne.text}?`}
+        </Typography>
+        <div className={classes.voteBar}>
+          <Typography variant='h5' className={classes.votePercent}>
+            {`${optionOnePercent} %`}
           </Typography>
-          <div className={classes.voteBar}>
-            <Typography variant='h5' className={classes.votePercent}>
-              {`${optionOnePercent} %`}
-            </Typography>
-            <div 
-              className={classes.voteBarFill} 
-              style={{width: `${optionOnePercent}%`}} />
-          </div>
-          <Typography variant='h6' className={classes.center}>
-            {`${optionOne.votes.length} out of ${totalVotes} votes`}
+          <div 
+            className={classes.voteBarFill} 
+            style={{width: `${optionOnePercent}%`}} />
+        </div>
+        <Typography variant='h6' className={classes.center}>
+          {`${optionOne.votes.length} out of ${totalVotes} votes`}
+        </Typography>
+      </Paper>
+      <Paper
+        className={(answer === 'optionTwo') ? classes.selected : classes.option}>
+        <Typography variant='h6'>
+          {`Would you rather ${optionTwo.text}?`}
+        </Typography>
+        <div className={classes.voteBar}>
+          <Typography variant='h5' className={classes.votePercent}>
+            {`${optionTwoPercent} %`}
           </Typography>
-        </Paper>
-        <Paper
-          className={(answer === 'optionTwo') ? classes.selected : classes.option}>
-          <Typography variant='h6'>
-            {`Would you rather ${optionTwo.text}?`}
-          </Typography>
-          <div className={classes.voteBar}>
-            <Typography variant='h5' className={classes.votePercent}>
-              {`${optionTwoPercent} %`}
-            </Typography>
-            <div 
-              className={classes.voteBarFill} 
-              style={{width: `${optionTwoPercent}%`}} />
-          </div>
-          <Typography variant='h6' className={classes.center}>
-            {`${optionTwo.votes.length} out of ${totalVotes} votes`}
-          </Typography>
-        </Paper>
-      </CardContent>
-    );
-  }
-
-}
+          <div 
+            className={classes.voteBarFill} 
+            style={{width: `${optionTwoPercent}%`}} />
+        </div>
+        <Typography variant='h6' className={classes.center}>
+          {`${optionTwo.votes.length} out of ${totalVotes} votes`}
+        </Typography>
+      </Paper>
+    </CardContent>
+  );
+};
 
 const styles = theme => ({
   center: {

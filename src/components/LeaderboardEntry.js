@@ -6,7 +6,7 @@ import {
   withStyles
 } from '@material-ui/core';
 
-function LeaderboardEntry (props) {
+const LeaderboardEntry = (props) => {
   const { name, avatar, answered, asked, classes } = props;
 
   return (
@@ -22,7 +22,7 @@ function LeaderboardEntry (props) {
       </div>
     </Paper>
   );
-}
+};
 
 const styles = theme => ({
   paper: {

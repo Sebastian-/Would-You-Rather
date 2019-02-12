@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { List, withStyles, Typography } from '@material-ui/core';
 import LeaderboardEntry from './LeaderboardEntry';
 
+const Leaderboard = (props) => {
+  const { classes, scores } = props;
 
-class Leaderboard extends Component {
-
-  render () {
-    const { classes, scores } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <Typography variant='h3'>Leaderboard</Typography>
-        <List>
-          {scores.map(({ id, name, avatar, asked, answered }) => (
-            <LeaderboardEntry
-              key={id}
-              name={name}
-              avatar={avatar}
-              asked={asked}
-              answered={answered} />
-          ))}
-        </List>
-      </div>
-    );
-  }
-}
-
+  return (
+    <div className={classes.container}>
+      <Typography variant='h3'>Leaderboard</Typography>
+      <List>
+        {scores.map(({ id, name, avatar, asked, answered }) => (
+          <LeaderboardEntry
+            key={id}
+            name={name}
+            avatar={avatar}
+            asked={asked}
+            answered={answered} />
+        ))}
+      </List>
+    </div>
+  );
+};
 
 const styles = {
   container: {

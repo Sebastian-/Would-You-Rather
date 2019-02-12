@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { formatDate, formatQuestion } from '../utils/helpers';
@@ -15,49 +15,44 @@ import {
   withStyles
 } from '@material-ui/core';
 
-
-class QuestionCard extends Component {
-
-  render () {
-    const { classes, question, isAnswered, id } = this.props;
-    const { timestamp, optionOneText, optionTwoText, avatarURL, authorName } = question;
-
-    return (
-      <Card className={classes.card}>
-        <CardHeader
-          className={classes.header}
-          avatar={
-            <Avatar src={avatarURL} className={classes.avatar}/>
-          }
-          title={<Typography variant="h4">{`${authorName} asks: `}</Typography>}
-          subheader={formatDate(timestamp)}
-        />
-        <Divider variant='middle' />
-        <CardContent>
-          <Typography variant="h5" className={classes.center}>
-            Would You Rather . . .
+const QuestionCard = (props) => {
+  const { classes, question, isAnswered, id } = props;
+  const { timestamp, optionOneText, optionTwoText, avatarURL, authorName } = question;
+  
+  return (
+    <Card className={classes.card}>
+      <CardHeader
+        className={classes.header}
+        avatar={
+          <Avatar src={avatarURL} className={classes.avatar}/>
+        }
+        title={<Typography variant="h4">{`${authorName} asks: `}</Typography>}
+        subheader={formatDate(timestamp)}
+      />
+      <Divider variant='middle' />
+      <CardContent>
+        <Typography variant="h5" className={classes.center}>
+          Would You Rather . . .
+        </Typography>
+        <Paper className={classes.option}>
+          <Typography variant="h6">
+            {optionOneText}
           </Typography>
-          <Paper className={classes.option}>
-            <Typography variant="h6">
-              {optionOneText}
-            </Typography>
-          </Paper>
-          <Paper className={classes.option}>
-            <Typography variant="h6">
-              {optionTwoText}
-            </Typography>
-          </Paper>
-        </CardContent>
-        <CardActions>
-          <Button component={Link} to={`/question/${id}`} className={classes.button}>
-            {isAnswered ? 'View Poll' : 'Vote'}
-          </Button>
-        </CardActions>
-      </Card>
-    );
-  }
-
-}
+        </Paper>
+        <Paper className={classes.option}>
+          <Typography variant="h6">
+            {optionTwoText}
+          </Typography>
+        </Paper>
+      </CardContent>
+      <CardActions>
+        <Button component={Link} to={`/question/${id}`} className={classes.button}>
+          {isAnswered ? 'View Poll' : 'Vote'}
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
 
 const styles = theme => ({ 
   card: {
