@@ -50,7 +50,7 @@ function mapStateToProps ({ users }) {
     };
   });
 
-  scores.sort((a, b) => (a.asked + a.answered) < (b.asked + b.answered));
+  scores.sort((a, b) =>  (b.asked + b.answered) - (a.asked + a.answered));
 
   return {
     scores

@@ -50,7 +50,7 @@ function mapStateToProps ({ questions, authedUser }) {
   };
 
   Object.keys(questions)
-    .sort((a, b) => (questions[a].timestamp < questions[b].timestamp))
+    .sort((a, b) => (questions[b].timestamp - questions[a].timestamp))
     .reduce((acc, id) => {
       if (
         questions[id].optionOne.votes.indexOf(authedUser) !== -1 
