@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { 
   Card,
@@ -11,42 +11,37 @@ import {
 import PollForm from './PollForm';
 import PollResults from './PollResults';
 
+const QuestionPoll = (props) => {
+  const { classes, id, answer, question } = props;
 
-class QuestionPoll extends Component {
-
-  render () {
-    const { classes, id, answer, question } = this.props;
-
-    if (question === null) {
-      return <h3>{`404: Question not found at /question/${id}`}</h3>;
-    }
-
-    const { optionOne, optionTwo, avatarURL, authorName } = question;
-
-    return (
-      <Card className={classes.card}>
-        <CardHeader
-          className={classes.header}
-          avatar={
-            <Avatar src={avatarURL} className={classes.avatar}/>
-          }
-          title={answer
-            ? <Typography variant="h4">{`Asked by ${authorName}`}</Typography>
-            : <Typography variant="h4">{`${authorName} asks: `}</Typography>
-          }
-        />
-        <Divider />
-        {answer ? 
-          <PollResults
-            answer={answer}
-            optionOne={optionOne}
-            optionTwo={optionTwo} />
-          : <PollForm id={id} />}
-      </Card>
-    );
+  if (question === null) {
+    return <h3>{`404: Question not found at /question/${id}`}</h3>;
   }
 
-}
+  const { optionOne, optionTwo, avatarURL, authorName } = question;
+
+  return (
+    <Card className={classes.card}>
+      <CardHeader
+        className={classes.header}
+        avatar={
+          <Avatar src={avatarURL} className={classes.avatar}/>
+        }
+        title={answer
+          ? <Typography variant="h4">{`Asked by ${authorName}`}</Typography>
+          : <Typography variant="h4">{`${authorName} asks: `}</Typography>
+        }
+      />
+      <Divider />
+      {answer ? 
+        <PollResults
+          answer={answer}
+          optionOne={optionOne}
+          optionTwo={optionTwo} />
+        : <PollForm id={id} />}
+    </Card>
+  );
+};
 
 const styles = theme => ({ 
   card: {
