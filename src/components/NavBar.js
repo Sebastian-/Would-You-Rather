@@ -52,7 +52,10 @@ class NavBar extends Component {
     return (
       <AppBar>
         <Toolbar>
-          <IconButton className={classes.menuButton} onClick={this.handleNavMenu}>
+          <IconButton
+            disabled={!userName}
+            className={classes.menuButton}
+            onClick={this.handleNavMenu}>
             <MenuIcon />
           </IconButton>
           <Menu
