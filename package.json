@@ -1,5 +1,6 @@
 {
   "name": "would-you-rather",
+  "homepage": "https://www.hsmdev.com/would-you-rather",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
