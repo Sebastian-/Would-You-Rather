@@ -17,12 +17,18 @@ class NavTabs extends Component {
 
   render() {
     const { value } = this.state;
-    const { navOptions } = this.props;
+    const { navOptions, disabled } = this.props;
 
     return (
       <Tabs value={value} onChange={this.handleChange}>
         {navOptions.map(({ path, name }) => (
-          <Tab key={path} component={Link} to={path} label={name} />
+          <Tab 
+            key={path}
+            component={Link}
+            to={path}
+            label={name}
+            disabled={disabled}  
+          />
         ))}
       </Tabs>
     );

@@ -26,7 +26,7 @@ const NavBar = (props) => {
     <AppBar>
       <Toolbar>
         {showNavTabs 
-          ? <NavTabs navOptions={navOptions} />
+          ? <NavTabs disabled={!userName} navOptions={navOptions} />
           : <NavMenu disabled={!userName} navOptions={navOptions} />
         }
         <div className={classes.grow} />
