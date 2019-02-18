@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   withStyles 
 } from '@material-ui/core';
-import { handleAddAnswer } from '../actions/shared';
+import { handleAddAnswer } from '../../actions/shared';
 
 
 class PollForm extends Component {

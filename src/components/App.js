@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared';
 import { withStyles, CssBaseline } from '@material-ui/core';
-import Dashboard from './Dashboard';
-import Leaderboard from './Leaderboard';
+import Dashboard from './dashboard/Dashboard';
+import Leaderboard from './leaderboard/Leaderboard';
 import NewQuestion from './NewQuestion';
 import Login from './Login';
-import NavBar from './NavBar';
-import QuestionPoll from './QuestionPoll';
-import PrivateRoute from './PrivateRoute';
+import NavBar from './nav-bar/NavBar';
+import QuestionPoll from './question-poll/QuestionPoll';
+import PrivateRoute from './util/PrivateRoute';
 
 class App extends Component {
   componentDidMount () {

@@ -7,7 +7,7 @@ import {
   MenuItem
 } from '@material-ui/core';
 import ArrowIcon from '@material-ui/icons/ArrowDropDown';
-import { setAuthUser } from '../actions/authedUser';
+import { setAuthUser } from '../../actions/authedUser';
 
 class LogoutMenu extends Component {
 
