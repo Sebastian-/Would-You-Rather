@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   CardContent,
   Typography,
   Paper,
-  withStyles 
+  withStyles, 
+  Button
 } from '@material-ui/core';
 
 const PollResults = (props) => {
@@ -48,6 +50,7 @@ const PollResults = (props) => {
           {`${optionTwo.votes.length} out of ${totalVotes} votes`}
         </Typography>
       </Paper>
+      <Button component={Link} to='/' fullWidth>Back to Questions</Button>
     </CardContent>
   );
 };
