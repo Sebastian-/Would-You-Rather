@@ -7,20 +7,14 @@ import {
 
 class NavTabs extends Component {
 
-  state = {
-    value: 0
-  }
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
   render() {
-    const { value } = this.state;
-    const { navOptions, disabled } = this.props;
+    const { navOptions, disabled, location } = this.props;
+    const value = navOptions
+      .map((option) => (option.path))
+      .indexOf(location.pathname);
 
     return (
-      <Tabs value={value} onChange={this.handleChange}>
+      <Tabs value={value < 0 ? false : value} onChange={this.handleChange}>
         {navOptions.map(({ path, name }) => (
           <Tab 
             key={path}

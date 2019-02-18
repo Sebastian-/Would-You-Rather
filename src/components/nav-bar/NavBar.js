@@ -19,14 +19,14 @@ const navOptions = [
 ];
 
 const NavBar = (props) => {
-  const { userName, avatar, classes } = props;
+  const { userName, avatar, classes, location} = props;
   const showNavTabs = useMediaQuery('(min-width:800px)');
 
   return (
     <AppBar>
       <Toolbar>
         {showNavTabs 
-          ? <NavTabs disabled={!userName} navOptions={navOptions} />
+          ? <NavTabs location={location} disabled={!userName} navOptions={navOptions} />
           : <NavMenu disabled={!userName} navOptions={navOptions} />
         }
         <div className={classes.grow} />
